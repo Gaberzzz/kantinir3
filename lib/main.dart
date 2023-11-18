@@ -8,6 +8,8 @@ import 'package:kantinir_mobile_app/models/user.dart';
 import 'package:kantinir_mobile_app/screens/wrapper.dart';
 import 'firebase_options.dart';
 
+Color backgroundColor = Colors.white;
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   //await Firebase.initializeApp();
