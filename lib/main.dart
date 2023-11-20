@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kantinir_mobile_app/screens/onboarding/onboarding1.dart';
 import 'package:kantinir_mobile_app/screens/onboarding/onboarding2.dart';
+import 'package:kantinir_mobile_app/screens/theme.dart';
 import 'package:kantinir_mobile_app/services/auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
@@ -12,33 +13,35 @@ Color backgroundColor = Colors.white;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  //await Firebase.initializeApp();
+
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  // For launch screen
-  // await Future.delayed(const Duration(seconds: 10));
-  // FlutterNativeSplash.remove();
-  runApp(const MaterialApp(
-    home: MyApp(),
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider(create: (_) => ThemeProvider()),
+    ],
+    child: MyApp(),
   ));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    // return MaterialApp(home: Wrapper());
-
-    return StreamProvider<MyUser?>.value(
-      initialData: null,
-      value: AuthService().user,
-      child: const MaterialApp(
-        debugShowCheckedModeBanner: false,
-        home: Onboarding1(),
+    return MaterialApp(
+      home: Consumer<ThemeProvider>(
+        builder: (context, theme, child) {
+          return Container(
+            color: theme.backgroundColor,
+            child: StreamProvider<MyUser?>.value(
+              initialData: null,
+              value: AuthService().user,
+              child: child,
+            ),
+          );
+        },
+        child: Onboarding1(),
       ),
     );
   }

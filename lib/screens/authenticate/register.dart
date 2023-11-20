@@ -41,9 +41,9 @@ class _RegisterState extends State<Register> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<ThemeProvider>(builder: (context, theme, child) {
+    return Consumer<ThemeProvider>(builder: (context, themeProvider, child) {
       return Scaffold(
-        backgroundColor: theme.backgroundColor,
+        backgroundColor: themeProvider.backgroundColor,
         appBar: AppBar(
           backgroundColor: Color(0xFF11CDA7),
           elevation: 0.0,
@@ -199,7 +199,7 @@ class _RegisterState extends State<Register> {
                       width: 200,
                       height: 800,
                       child: MaterialPicker(
-                        pickerColor: Colors.red, //default color
+                        pickerColor: Colors.white, //default color
                         onColorChanged: (Color color) {
                           Provider.of<ThemeProvider>(context, listen: false)
                               .updateBackground(color);

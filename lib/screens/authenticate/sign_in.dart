@@ -28,11 +28,10 @@ class _SignInPageState extends State<SignInPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<ThemeProvider>(builder: (context, theme, child) {
+    return Consumer<ThemeProvider>(builder: (context, themeProvider, child) {
       return Scaffold(
-        backgroundColor: Color.fromARGB(255, 255, 255, 255),
+        backgroundColor: themeProvider.backgroundColor,
         appBar: AppBar(
-          backgroundColor: theme.backgroundColor,
           elevation: 0.0,
           title: Text('Sign in to KanTinir'),
           actions: <Widget>[
