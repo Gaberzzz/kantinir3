@@ -1,3 +1,4 @@
+import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:kantinir_mobile_app/screens/theme.dart';
 import 'package:kantinir_mobile_app/services/auth.dart';
 import 'package:flutter/material.dart';
@@ -94,6 +95,24 @@ class _SignInPageState extends State<SignInPage> {
                     setState(() => password = val);
                   },
                 ),
+                Text('What was your favorite color?'),
+                // ColorPicker widget
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: SizedBox(
+                    width: 200,
+                    height: 800,
+                    child: MaterialPicker(
+                      pickerColor: Colors.white, //default color
+                      onColorChanged: (Color color) {
+                        Provider.of<ThemeProvider>(context, listen: false)
+                            .updateBackground(color);
+                      },
+                    ),
+                  ),
+                ),
+
+                SizedBox(height: 12.0),
                 SizedBox(height: 20.0),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
