@@ -24,6 +24,7 @@ class _RegisterState extends State<Register> {
   String password2 = '';
   String confirmPassword = '';
   String error = '';
+
   TextEditingController dateInput =
       TextEditingController(); // Initialize the controller
   String selectedEducationLevel = '';
@@ -201,6 +202,7 @@ class _RegisterState extends State<Register> {
                       child: MaterialPicker(
                         pickerColor: Colors.white, //default color
                         onColorChanged: (Color color) {
+                          selectedColor = color;
                           Provider.of<ThemeProvider>(context, listen: false)
                               .updateBackground(color);
                         },
@@ -224,7 +226,7 @@ class _RegisterState extends State<Register> {
                       if (_formKey.currentState!.validate()) {
                         dynamic result =
                             await _auth.registerWithEmailAndPassword(
-                                email, confirmPassword);
+                                email, confirmPassword, selectedColor);
                         if (result == null) {
                           setState(
                               () => error = 'Please supply a valid email.');
